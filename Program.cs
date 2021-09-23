@@ -14,10 +14,10 @@ namespace ColumnArithmetic
 
             var jsonData = File.ReadAllText("./data/generic.json");
 
-            var dataList = JsonSerializer.Deserialize<List<Dictionary<string, int>>>(jsonData);
+            var dataList = JsonSerializer.Deserialize<List<Dictionary<string, float>>>(jsonData);
 
             Console.WriteLine("Data from JSON file:");
-            PrintDictinaryList(dataList);
+            PrintDictionaryList(dataList);
 
             bool firstHint = false;
 
@@ -43,44 +43,38 @@ namespace ColumnArithmetic
 
                 if (splitString.Length == 4)
                 {
-                    if (splitString[0] == "add")
+                    if (splitString[0] == "add") // > add A B C
                     {
-                        // > add A B C
-
-                        foreach (Dictionary<string, int> dict in dataList)
+                        foreach (Dictionary<string, float> dict in dataList)
                         {
                             dict[splitString[3]] = dict[splitString[1]] + dict[splitString[2]];
                         }
 
-                        PrintDictinaryList(dataList);
+                        PrintDictionaryList(dataList);
                     }
-                    else if (splitString[0] == "sub")
+                    else if (splitString[0] == "sub") // > sub A B C
                     {
-                        // > sub A B C
-
-                        foreach (Dictionary<string, int> dict in dataList)
+                        foreach (Dictionary<string, float> dict in dataList)
                         {
                             dict[splitString[3]] = dict[splitString[1]] - dict[splitString[2]];
                         }
 
-                        PrintDictinaryList(dataList);
+                        PrintDictionaryList(dataList);
                     }
-                    else if (splitString[0] == "mult")
+                    else if (splitString[0] == "mult") // > mult A B C
                     {
-                        // > mult A B C
-
-                        foreach (Dictionary<string, int> dict in dataList)
+                        foreach (Dictionary<string, float> dict in dataList)
                         {
                             dict[splitString[3]] = dict[splitString[1]] * dict[splitString[2]];
                         }
 
-                        PrintDictinaryList(dataList);
+                        PrintDictionaryList(dataList);
                     }
-                    else if (splitString[0] == "pow")
+                    else if (splitString[0] == "pow") // pow A B C
                     {
-                        foreach (Dictionary<string, int> dict in dataList)
+                        foreach (Dictionary<string, float> dict in dataList)
                         {
-                            int product = 1;
+                            float product = 1;
 
                             for (int i = 0; i < dict[splitString[2]]; i++)
                             {
@@ -90,7 +84,7 @@ namespace ColumnArithmetic
                             dict[splitString[3]] = product;
                         }
 
-                        PrintDictinaryList(dataList);
+                        PrintDictionaryList(dataList);
                     }
                 }
                 else
@@ -101,11 +95,11 @@ namespace ColumnArithmetic
             }
         }
 
-        public static void PrintDictinaryList(List<Dictionary<string, int>> dataList)
+        public static void PrintDictionaryList(List<Dictionary<string, float>> dataList)
         {
-            foreach (Dictionary<string, int> dict in dataList)
+            foreach (Dictionary<string, float> dict in dataList)
             {
-                foreach (KeyValuePair<string, int> pair in dict)
+                foreach (KeyValuePair<string, float> pair in dict)
                 {
                     Console.Write($"{pair.Key}: {pair.Value} ");
                 }
